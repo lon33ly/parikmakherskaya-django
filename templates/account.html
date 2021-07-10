@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+    {% block index %}
+    <p>Личный кабинет</p>
+    <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+    {% if orders %}
+    <h3>Заказы</h3>
+        <table style="width:100%">
+          <tr>
+            <th>Дата Заказа</th>
+            <th>Мастер</th>
+            <th>Общая цена</th>
+            <th>Выбранные услуги</th>
+          </tr>
+          {% for order in orders %}
+            <tr>
+              <th>{{ order.finish_time }}</th>
+              <th>{{ order.master_id }}</th>
+              <th>{{ order.total_price }}</th>
+              <th>{% for service in order.services.select_related %}
+                    {{ service }},
+                  {% endfor %}
+              </th>
+            </tr>
+          {% endfor %}
+        </table>
+        {% endif %}
+    <a href="{% url 'logout' %}">Выйти</a>
+    {% endblock %}

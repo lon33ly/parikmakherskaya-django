@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block index %}
+    <link href="{% static 'login.css' %}" rel="stylesheet">
+    <div class="login-page">
+
+    <div class="form">
+    {% if auth %}
+      <form method="POST" class="login-form">
+          {% csrf_token %}
+          <p style="margin-bottom: 0px;">Дата</p>
+          <select style="margin-bottom: 15px;" id="date" name="date">
+                <option value="" hidden>Выберите дату</option>
+                    {% for date in date_list %}
+                        <option>{{ date.date }}</option>
+                    {% endfor %}
+          </select>
+          <p style="margin-bottom: 0px;">Время</p>
+          <select required style="margin-bottom: 15px;" id="time" name="time">
+                <option value="" hidden>Выберите время</option>
+                    {% for time in time_list %}
+                        <option>{{ time.time }}</option>
+                    {% endfor %}
+          </select>
+          <p style="margin-bottom: 0px;">Мастер</p>
+          <select required style="margin-bottom: 15px;" id="master" name="master">
+                <option value="" hidden>Выберите мастера</option>
+                    {% for master in master_list %}
+                        <option>{{ master.name }} {{ master.surname }}</option>
+                    {% endfor %}
+          </select>
+          <p style="margin-bottom: 0px;">Комментарий к заказу</p>
+          <textarea id="description" rows="5" cols="30" name="description"></textarea>
+      <button>Записаться</button>
+    </form>
+    {% else %}
+        <p>Чтобы записать нужно войти на сайт!</p>
+    {% endif %}
+    </div>
+
+</div>
+    {% endblock%}
