@@ -18,7 +18,7 @@ class Time(models.Model):
 
 
 class Master(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Имя")
+    name = models.CharField(max_length=100, verbose_name="Имеще")
     surname = models.CharField(max_length=100, verbose_name="Фамилия")
     photo = models.FileField(upload_to='masters_photo/', verbose_name="Фото",
                              validators=[FileExtensionValidator(['svg', 'png', 'jpeg'])])
